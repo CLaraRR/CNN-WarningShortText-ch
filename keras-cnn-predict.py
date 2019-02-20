@@ -6,16 +6,17 @@ from sklearn.preprocessing import LabelEncoder
 model = load_model('model')
 seq_length = 200
 labelEncoder = LabelEncoder()
-def predict(text):
-    # read vocabulary
-    with open('vocabulary2.txt', encoding='utf8') as file:
-        vocabulary_list = [k.strip() for k in file.readlines()]
-    with open('labelEncoder.pickle', 'rb') as file:
-        labelEncoder =  pickle.load(file)
-    # build word-id dict
-    word2id_dict = dict([(b, a) for a, b in enumerate(vocabulary_list)])
-    # print(word2id_dict)
+# read vocabulary
+with open('vocabulary.txt', encoding='utf8') as file:
+    vocabulary_list = [k.strip() for k in file.readlines()]
+with open('labelEncoder.pickle', 'rb') as file:
+    labelEncoder =  pickle.load(file)
+# build word-id dict
+word2id_dict = dict([(b, a) for a, b in enumerate(vocabulary_list)])
+# print(word2id_dict)
 
+
+def predict(text):
     text = [text]
     # transform contents into id sequences
     content2idList = lambda content : [word2id_dict[word] for word in content if word in word2id_dict]
